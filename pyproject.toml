@@ -1,0 +1,26 @@
+[project]
+name = "ecommerce-core"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Maksim Obroskov",email = "CAPITANRB-107@yandex.ru"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+]
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^9.1.1"
+pytest-cov = "^7.1.0"
+flake8 = "^7.3.0"
+black = "^26.5.1"
+isort = "^9.0.1"
+
