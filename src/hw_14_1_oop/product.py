@@ -21,3 +21,5 @@ class Category:
 
         Category.category_count += 1
         Category.product_count += len(products)
+
+# HW 14.1
