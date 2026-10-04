@@ -2,13 +2,27 @@ class Product:
     """Класс продукта для e-commerce."""
 
     def __init__(
-            self, name: str, description: str,
-            price: float, quantity: int
+            self,
+            name: str,
+            description: str,
+            price: float,
+            quantity: int,
     ):
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
+
+    def __str__(self) -> str:
+        """Строковое представление продукта."""
+        return (
+            f"{self.name}, {int(self.__price)} руб. "
+            f"Остаток: {self.quantity} шт."
+        )
+
+    def __add__(self, other: "Product") -> float:
+        """Сложение продуктов: цена × количество."""
+        return self.__price * self.quantity + other.__price * other.quantity
 
     @property
     def price(self) -> float:
@@ -52,6 +66,11 @@ class Category:
         """Добавляет продукт и увеличивает счётчик."""
         self.__products.append(product)
         Category.product_count += 1
+
+    def __str__(self) -> str:
+        """Строковое представление категории."""
+        total = sum(p.quantity for p in self.__products)
+        return f"{self.name}, количество продуктов: {total} шт."
 
     @property
     def products(self) -> str:

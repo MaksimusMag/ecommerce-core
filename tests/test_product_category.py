@@ -1,4 +1,4 @@
-from src.hw_14_1_oop.product import Product, Category
+from src.hw_14_1_oop.product import Category, Product
 
 
 def test_product_initialization():
@@ -11,9 +11,7 @@ def test_product_initialization():
 
 def test_category_initialization():
     products = [Product("Мышь", "Беспроводная", 2500.0, 50)]
-    category = Category(
-        "Периферия", "Компьютерные мыши", products
-    )
+    category = Category("Периферия", "Компьютерные мыши", products)
 
     assert category.name == "Периферия"
     assert category.description == "Компьютерные мыши"
@@ -31,11 +29,10 @@ def test_category_counts_auto_increment():
         [Product("Товар 1", "Опис", 100, 5)]
     )
     cat2 = Category(
-        "Категория 2", "Описание 2",
-        [
-            Product("Товар 2", "Опис", 200, 3),
-            Product("Товар 3", "Опис", 300, 7)
-        ]
+        "Категория 2",
+        "Описание 2",
+        [Product("Товар 2", "Опис", 200, 3),
+         Product("Товар 3", "Опис", 300, 7)],
     )
 
     assert Category.category_count == 2
@@ -81,7 +78,7 @@ def test_new_product():
         "name": "Телефон",
         "description": "Смартфон",
         "price": 30000.0,
-        "quantity": 20
+        "quantity": 20,
     }
     p = Product.new_product(data)
 
@@ -97,7 +94,27 @@ def test_products_getter_format():
     cat = Category("Тест", "Описание", [p1, p2])
 
     expected = (
-        "Товар1, 100.0 руб. Остаток: 5 шт.\n"
-        "Товар2, 200.0 руб. Остаток: 10 шт.\n"
+        "Товар1, 100.0 руб. Остаток: 5 шт.\n" "Товар2, 200.0 руб. "
+        "Остаток: 10 шт.\n"
     )
     assert cat.products == expected
+
+
+def test_product_str():
+    p = Product("Samsung Galaxy", "256GB", 180000.0, 5)
+    assert str(p) == "Samsung Galaxy, 180000 руб. Остаток: 5 шт."
+
+
+def test_category_str():
+    products = [
+        Product("Товар1", "Опис", 100.0, 5),
+        Product("Товар2", "Опис", 200.0, 10),
+    ]
+    cat = Category("Электроника", "Гаджеты", products)
+    assert str(cat) == "Электроника, количество продуктов: 15 шт."
+
+
+def test_product_add():
+    p1 = Product("A", "Опис", 100.0, 10)
+    p2 = Product("B", "Опис", 200.0, 2)
+    assert p1 + p2 == 1400.0
